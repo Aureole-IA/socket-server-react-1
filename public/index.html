@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+             
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <blockquote>
+                Mini CHAT    
+            </blockquote>
+            <div class="col s12">
+                <ul id="my_msg" class="collection with-header">
+
+                  </ul>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="input-field col s9">
+                <input  id="msg" type="text">
+                <label for="first_name">mensaje</label>
+              </div>
+              <div class="col s3 valign-wrapper">
+                  <input class="waves-effect waves-light btn" type="button" id="enviar" value="enviar">
+              </div>
+        </div>
+        
+    </div>
+
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            var lista_mensages = document.getElementById('my_msg')
+            socket.on("msg_history",(data)=>{
+                console.log(data)
+                try {
+                    lista_mensages.innerHTML=""
+                    data.map(e=>{
+                        lista_mensages.innerHTML += `
+                        <li class="collection-item"><div>${e}</div></li>
+                        `
+                    })
+                } catch (error) {
+                    
+                }
+            })
+            
+            document.getElementById('enviar').addEventListener('click', ()=>{
+                socket.emit('new_msg', document.getElementById('msg').value)
+            })
+        </script>
+</body>
+</html>
