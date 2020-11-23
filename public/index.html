@@ -14,7 +14,9 @@
 <body>
     
     <div class="container">
-        <div class="row">
+        <h1>ACCESO DENEGADO</h1>
+        <!-- <div class="row">
+            
             <blockquote>
                 Mini CHAT    
             </blockquote>
@@ -33,7 +35,7 @@
               <div class="col s3 valign-wrapper">
                   <input class="waves-effect waves-light btn" type="button" id="enviar" value="enviar">
               </div>
-        </div>
+        </div> -->
         
     </div>
 
@@ -45,17 +47,16 @@
             var socket = io();
             var lista_mensages = document.getElementById('my_msg')
             socket.on("msg_history",(data)=>{
-                console.log(data)
-                try {
-                    lista_mensages.innerHTML=""
-                    data.map(e=>{
-                        lista_mensages.innerHTML += `
-                        <li class="collection-item"><div>${e}</div></li>
-                        `
-                    })
-                } catch (error) {
+                // try {
+                //     lista_mensages.innerHTML=""
+                //     data.map(e=>{
+                //         lista_mensages.innerHTML += `
+                //         <li class="collection-item"><div>${e}</div></li>
+                //         `
+                //     })
+                // } catch (error) {
                     
-                }
+                // }
             })
             
             document.getElementById('enviar').addEventListener('click', ()=>{
